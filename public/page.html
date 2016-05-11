@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Push Notification codelab</title>
+  
+  <style> 
+    
+    #space_cat {
+      width: 450px;
+    }
+    
+    #link {
+      display: block;
+    }
+    
+  </style>
+  
+</head>
+<body>
+  
+  
+  <h1>Another Page.</h1>
+  
+  <a href="/" id="link"> Home </a>
+ 
+  
+  <img id="space_cat" src="/public/images/spaceDog.jpg" alt="Totally awesome space-cat."/>
+  <script>
+    
+    
+    if ('serviceWorker' in navigator) {
+      console.log('Service Worker is supported');
+      navigator.serviceWorker.register('/sw.js').then(function(reg) {
+      console.log(':^)', reg);
+       // TODO
+     }).catch(function(err) {
+        console.log(':^(', err);
+    });
+  }   
+    
+  </script>
+</body>
+</html>

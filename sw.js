@@ -16,10 +16,10 @@ self.addEventListener("install", function(event) {
       */
       .open(version + 'fundamentals')
       .then(function(cache) {
-        // After the cache is opened, we can fill it with the offline fundamentals
+        // After the cache is opened, we fill it up!
         
         return cache.addAll([
-          ///public/images/spaceCat.jpeg',
+          //'public/images/spaceCat.jpeg',
          // '/public/index.html',
          '/public' //cache everything in that directory
           
@@ -49,6 +49,7 @@ self.addEventListener("fetch", function(event) {
      HTTP response indicating failure.
   */
   
+  //log the request
   console.log("Request: " + event.request);
   
   event.respondWith(
@@ -61,8 +62,8 @@ self.addEventListener("fetch", function(event) {
       .then(function(cached) {
         
         /* A LITTLE BIT UNSURE OF THIS PART INVOLVING THE NETWORK REQUEST
-        I THINK IT CHECKS TO SEE IF THERE IS A NETWORK AVAILABLRE - IF THERE IS IT CACHES NEW DATA
-        IF NOT IT USED THE OLD STUFF?
+        I THINK IT CHECKS TO SEE IF THERE IS A NETWORK AVAILABLE - IF THERE IS, IT CACHES NEW DATA,
+        IF NOT IT USES THE OLD STUFF?
           */
         
         /* Even if the response is in our cache, we go to the network as well.
@@ -139,6 +140,42 @@ self.addEventListener("fetch", function(event) {
             })
           });
         }
+      })
+  );
+});
+
+//CLEANS UP OLDER SERVICE WORKERS
+
+self.addEventListener("activate", function(event) {
+  /* Just like with the install event, event.waitUntil blocks activate on a promise.
+     Activation will fail unless the promise is fulfilled.
+  */
+  console.log('WORKER: activate event in progress.');
+
+  event.waitUntil(
+    caches
+      /* This method returns a promise which will resolve to an array of available
+         cache keys.
+      */
+      .keys()
+      .then(function (keys) {
+        // We return a promise that settles when all outdated caches are deleted.
+        return Promise.all(
+          keys
+            .filter(function (key) {
+              // Filter by keys that don't start with the latest version prefix.
+              return !key.startsWith(version);
+            })
+            .map(function (key) {
+              /* Return a promise that's fulfilled
+                 when each outdated cache is deleted.
+              */
+              return caches.delete(key);
+            })
+        );
+      })
+      .then(function() {
+        console.log('WORKER: activate completed.');
       })
   );
 });

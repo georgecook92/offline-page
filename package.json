@@ -11,5 +11,8 @@
   "dependencies": {
     "ejs": "^2.4.1",
     "express": "^4.13.4"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1"
   }
 }

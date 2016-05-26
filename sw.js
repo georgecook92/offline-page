@@ -50,7 +50,7 @@ self.addEventListener("fetch", function(event) {
   */
   
   //log the request
-  console.log("Request: " + event.request);
+  console.dir("Request: " + event.request);
   
   event.respondWith(
     caches

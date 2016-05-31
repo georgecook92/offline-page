@@ -1,44 +1,42 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-  <title>Offline - Home Page</title>
-  
-  <style> 
-    
-    #space_cat {
-      width: 450px;
-    }
-    
-    #link {
-      display: block;
-    }
-    
-  </style>
-  
+    <title>Offline - Home Page</title>
+
+    <style>
+        #space_cat {
+            width: 450px;
+        }
+
+        #link {
+            display: block;
+        }
+    </style>
+
 </head>
+
 <body>
-  
-  
-  <h1>Woah.</h1>
-  <p>This page must be accessed using HTTPS or via localhost.</p>
-  
-  <a href="/anotherPage" id="link"> Another Page </a>
- 
-  
-  <img id="space_cat" src="/public/images/spaceCat.jpeg" alt="Totally awesome space-cat."/>
-  <script>
-    
-    
-    if ('serviceWorker' in navigator) {
-      console.log('Service Worker is supported');
-      navigator.serviceWorker.register('/sw.js').then(function(reg) {
-      console.log(':^)', reg);
-       // TODO
-     }).catch(function(err) {
-        console.log(':^(', err);
-    });
-  }   
-    
-  </script>
+
+
+    <h1>Woah.</h1>
+    <p>This page must be accessed using HTTPS or via localhost.</p>
+
+    <a href="/anotherPage" id="link"> Another Page </a>
+
+
+    <img id="space_cat" src="/public/images/spaceCat.jpeg" alt="Totally awesome space-cat." />
+    <script>
+        if ('serviceWorker' in navigator) {
+            console.log('Service Worker is supported');
+            navigator.serviceWorker.register('/sw.js').then(function(reg) {
+                console.log(':^)', reg);
+                // TODO
+            }).catch(function(err) {
+                console.log(':^(', err);
+            });
+        }
+    </script>
 </body>
+
 </html>

@@ -1,5 +1,5 @@
 {
-  "name": "basic",
+  "name": "basic service worker example",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -12,7 +12,5 @@
     "ejs": "^2.4.1",
     "express": "^4.13.4"
   },
-  "devDependencies": {
-    "gulp": "^3.9.1"
-  }
+  
 }
